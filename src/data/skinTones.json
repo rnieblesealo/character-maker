@@ -1,22 +1,17 @@
 {
-  "all": [
-    {
-      "name": "Tan",
+  "Tan": {
       "head": "/bodyparts/h_head.png",
       "body": "/bodyparts/h_body.png",
       "color": "#C66C3D"
-    },
-    {
-      "name": "Black",
+  },
+  "Black": {
       "head": "/bodyparts/b_head.png",
       "body": "/bodyparts/b_body.png",
       "color": "#903B24"
-    },
-    {
-      "name": "White",
+  },
+  "White": {
       "head": "/bodyparts/w_head.png",
       "body": "/bodyparts/w_body.png",
       "color": "#F19C64"
-    }
-  ]
+  }
 }

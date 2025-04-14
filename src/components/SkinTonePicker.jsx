@@ -8,25 +8,32 @@ const SkinTonePicker = ({ setBody, setHead }) => {
     setBody(body)
   }, [setBody, setHead]) // only rerender this when given func props change
 
-  // set default skintone 
+  // set default skintone to first key's 
   useEffect(() => {
-    setSkin(
-      skinTones.all[0]?.head,
-      skinTones.all[0]?.body,
-    )
+    const keys = Object.keys(skinTones)
+
+    const firstHead = skinTones[keys[0]]?.head
+    const firstBody = skinTones[keys[0]]?.body
+
+    if (!firstHead || !firstBody){
+      return;
+    }
+  
+    setSkin(firstHead, firstBody)
+
   }, [setSkin])
 
-  const options = skinTones.all.map((skinTone) => {
+  const options = Object.entries(skinTones).map(([name, details]) => {
     return (
       <button
-        key={skinTone.name}
-        onClick={() => setSkin(skinTone.head, skinTone.body)}
+        key={name}
+        onClick={() => setSkin(details.head, details.body)}
         className="relative w-15 aspect-square bg-[#C66C3D] rounded-md"
         style={{
-          backgroundColor: skinTone.color
+          backgroundColor: details.color
         }}
       >
-        <MouseTooltip text={skinTone.name} />
+        <MouseTooltip text={name} />
       </button>
     )
   })
