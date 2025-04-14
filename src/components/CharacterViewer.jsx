@@ -1,14 +1,21 @@
+import clsx from "clsx"
+
 const CharacterViewer = ({
   name,
   hair,
   head,
   top,
   pants,
-  body
+  body,
+  hero
 }) => {
+  const width = clsx(!hero ? "w-30" : "w-50")
+  const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
+  const extra = clsx(!hero && "border-1 p-2 rounded-lg")
+
   return (
-    <div>
-      <div className="relative bg-gray-400 w-50 aspect-square rounded-lg">
+    <div className={`${extra} flex flex-col items-center justify-center`}>
+      <div className={`${width} relative bg-gray-400 aspect-square rounded-lg`}>
         {hair &&
           <img
             src={hair}
@@ -41,7 +48,7 @@ const CharacterViewer = ({
         }
       </div>
       {name &&
-        <p className="text-center mt-2">{name}</p>
+        <p className={`${textSize} text-center mt-2`}>{name}</p>
       }
     </div>
   )
