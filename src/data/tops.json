@@ -1,0 +1,18 @@
+{
+  "Black Shirt": {
+    "icon": "/bodyparts_menu/m_sblack.png",
+    "asset": "/bodyparts/s_black.png"
+  },
+  "Dress": {
+    "icon": "/bodyparts_menu/m_sdress.png",
+    "asset": "/bodyparts/s_dress.png"
+  },
+  "Graphic Tee": {
+    "icon": "/bodyparts_menu/m_sgraphic.png",
+    "asset": "/bodyparts/s_graphic.png"
+  },
+  "Striped Shirt": {
+    "icon": "/bodyparts_menu/m_sstripes.png",
+    "asset": "/bodyparts/s_stripe.png"
+  }
+}

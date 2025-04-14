@@ -4,61 +4,16 @@ import ClothingPicker from "./components/ClothingPicker"
 
 import { useState } from "react"
 
+import allTops from "./data/tops.json"
+import allPants from "./data/pants.json"
+import allHairstyles from "./data/hairstyles.json"
+
 function App() {
   const [hair, setHair] = useState("")
   const [head, setHead] = useState("")
   const [top, setTop] = useState("")
   const [pants, setPants] = useState("")
   const [body, setBody] = useState("")
-
-  const allTops = {
-    "Black Shirt": {
-      icon: "/bodyparts_menu/m_sblack.png",
-      asset: "/bodyparts/s_black.png"
-    },
-    "Dress": {
-      icon: "/bodyparts_menu/m_sdress.png",
-      asset: "/bodyparts/s_dress.png"
-    },
-    "Graphic Tee": {
-      icon: "/bodyparts_menu/m_sgraphic.png",
-      asset: "/bodyparts/s_graphic.png"
-    },
-    "Striped Shirt": {
-      icon: "/bodyparts_menu/m_sstripes.png",
-      asset: "/bodyparts/s_stripe.png"
-    },
-  }
-
-  const allPants = {
-    "Regular Jeans": {
-      icon: "/bodyparts_menu/m_jeans.png",
-      asset: "/bodyparts/b_jeans.png"
-    },
-    "Vintage Jeans": {
-      icon: "/bodyparts_menu/m_jwashed.png",
-      asset: "/bodyparts/b_washed.png"
-    },
-    "Jorts": {
-      icon: "/bodyparts_menu/m_jorts.png",
-      asset: "/bodyparts/b_jorts.png"
-    },
-  }
-
-  const allHairstyles = {
-    "Short": {
-      icon: "/bodyparts_menu/m_shair.png",
-      asset: "/bodyparts/s_hair.png"
-    },
-    "Emo": {
-      icon: "/bodyparts_menu/m_lhair.png",
-      asset: "/bodyparts/e_hair.png"
-    },
-    "Long": {
-      icon: "/bodyparts_menu/m_mhair.png",
-      asset: "/bodyparts/m_hair.png"
-    },
-  }
 
   return (
     <div className="w-screen h-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">

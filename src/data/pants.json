@@ -1,0 +1,14 @@
+{
+  "Regular Jeans": {
+    "icon": "/bodyparts_menu/m_jeans.png",
+    "asset": "/bodyparts/b_jeans.png"
+  },
+  "Vintage Jeans": {
+    "icon": "/bodyparts_menu/m_jwashed.png",
+    "asset": "/bodyparts/b_washed.png"
+  },
+  "Jorts": {
+    "icon": "/bodyparts_menu/m_jorts.png",
+    "asset": "/bodyparts/b_jorts.png"
+  }
+}
