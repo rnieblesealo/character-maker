@@ -1,5 +1,5 @@
 {
-  "Short": {
+  "Tidy": {
     "icon": "/bodyparts_menu/m_shair.png",
     "asset": "/bodyparts/s_hair.png"
   },
@@ -7,7 +7,7 @@
     "icon": "/bodyparts_menu/m_lhair.png",
     "asset": "/bodyparts/e_hair.png"
   },
-  "Long": {
+  "Grown Out": {
     "icon": "/bodyparts_menu/m_mhair.png",
     "asset": "/bodyparts/m_hair.png"
   }

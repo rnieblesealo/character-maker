@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react"
+import MouseTooltip from "./MouseTooltip"
 
 const SkinTonePicker = ({ setBody, setHead }) => {
   const heads = {
@@ -26,9 +27,15 @@ const SkinTonePicker = ({ setBody, setHead }) => {
     <div className="flex items-center m-4">
       <p className="w-30">Skin Tone</p>
       <div className="flex gap-1">
-        <button className="w-15 aspect-square bg-[#C66C3D] rounded-md" onClick={() => setSkin(heads.tan, bodies.tan)} />
-        <button className="w-15 aspect-square bg-[#903B24] rounded-md" onClick={() => setSkin(heads.black, bodies.black)} />
-        <button className="w-15 aspect-square bg-[#F19C64] rounded-md" onClick={() => setSkin(heads.white, bodies.white)} />
+        <button className="relative w-15 aspect-square bg-[#C66C3D] rounded-md" onClick={() => setSkin(heads.tan, bodies.tan)}>
+          <MouseTooltip text="Tan" />
+        </button>
+        <button className="relative w-15 aspect-square bg-[#903B24] rounded-md" onClick={() => setSkin(heads.black, bodies.black)}>
+          <MouseTooltip text="Black" />
+        </button>
+        <button className="relative w-15 aspect-square bg-[#F19C64] rounded-md" onClick={() => setSkin(heads.white, bodies.white)}>
+          <MouseTooltip text="White" />
+        </button>
       </div>
     </div>
   )
