@@ -4,3 +4,7 @@
 @theme {
   --font-pixel: "Micro 5"
 }
+
+body {
+  background-color: black;
+}

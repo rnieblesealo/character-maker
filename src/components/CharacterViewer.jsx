@@ -13,7 +13,7 @@ const CharacterViewer = ({
   pants,
   hero
 }) => {
-  const width = clsx(!hero ? "w-30" : "w-50")
+  const width = clsx(!hero ? "w-40" : "w-50")
   const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
   const extra = clsx(!hero && "border-1 p-2 rounded-lg")
 
