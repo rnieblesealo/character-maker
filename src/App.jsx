@@ -3,17 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import ViewCharacters from "./pages/ViewCharacters"
 import CreateCharacter from "./pages/CreateCharacter"
-
-/* routing example:  
-     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index={true} element={<Dashboard />} />
-          <Route index={false} path="/artistInfo/:id" element={<DetailView />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-*/
+import DetailView from "./pages/DetailView"
 
 const App = () => {
   return (
@@ -21,7 +11,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index={true} element={<ViewCharacters />} />
-          <Route path="/create" element={<CreateCharacter />}/>
+          <Route path="/create" element={<CreateCharacter />} />
+          <Route path="/view/:id" element={<DetailView />} />
         </Route>
       </Routes>
     </BrowserRouter>

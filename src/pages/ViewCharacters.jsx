@@ -16,13 +16,14 @@ const ViewCharacters = () => {
     }
 
     fetchCharacters()
-    
+
     console.log("this")
   }, [])
 
   const dbCharacterViewers = dbCharacters?.map((info) => (
     <CharacterViewer
       key={info.name}
+      id={info.id}
       name={info.name}
       skinTone={info.skinTone}
       hair={info.hair}

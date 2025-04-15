@@ -3,6 +3,7 @@ import SkinTonePicker from "../components/SkinTonePicker"
 import ClothingPicker from "../components/ClothingPicker"
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import supabase from "../scripts/client"
 
@@ -12,6 +13,8 @@ import allHairstyles from "../data/hairstyles.json"
 import allSkinTones from "../data/skinTones.json"
 
 const CreateCharacter = () => {
+  const navigate = useNavigate()
+
   const [skinTone, setSkinTone] = useState("")
   const [name, setName] = useState("My Character")
   const [hair, setHair] = useState("")
@@ -38,6 +41,9 @@ const CreateCharacter = () => {
         pants: pants,
       })
       .select()
+
+    // go to view screen
+    navigate("/")
   }
 
   return (
@@ -73,6 +79,11 @@ const CreateCharacter = () => {
           set={setSkinTone}
         />
         <ClothingPicker
+          clothes={allHairstyles}
+          name="Hairstyles"
+          set={setHair}
+        />
+        <ClothingPicker
           clothes={allTops}
           name="Tops"
           set={setTop}
@@ -81,11 +92,6 @@ const CreateCharacter = () => {
           clothes={allPants}
           name="Pants"
           set={setPants}
-        />
-        <ClothingPicker
-          clothes={allHairstyles}
-          name="Hairstyles"
-          set={setHair}
         />
 
         <div className="flex w-1/2 gap-2 m-4">

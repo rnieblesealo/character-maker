@@ -1,11 +1,14 @@
 import clsx from "clsx"
 
+import { useNavigate } from "react-router-dom"
+
 import allHairstyles from "../data/hairstyles.json"
 import allPants from "../data/pants.json"
 import allSkinTones from "../data/skinTones.json"
 import allTops from "../data/tops.json"
 
 const CharacterViewer = ({
+  id,
   name,
   skinTone,
   hair,
@@ -13,8 +16,10 @@ const CharacterViewer = ({
   pants,
   hero
 }) => {
+  const navigate = useNavigate() // used instead of link due to nested div
+
   const width = clsx(!hero ? "w-40" : "w-50")
-  const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
+  const textSize = clsx(!hero ? "text-2xl" : "text-3xl")
   const extra = clsx(!hero && "border-1 p-2 rounded-lg")
 
   const ClothingItem = ({ from, keyName, z }) => {
@@ -50,7 +55,10 @@ const CharacterViewer = ({
   }
 
   return (
-    <div className={`${extra} w-min flex flex-col items-center justify-center`}>
+    <div
+      onClick={() => navigate(`/view/${id}`)}
+      className={`${extra} w-min flex flex-col items-center justify-center`}
+    >
       <div className={`${width} relative bg-gray-400 aspect-square rounded-lg`}>
 
         <ClothingItem from={allHairstyles} keyName={hair} z={5} />
