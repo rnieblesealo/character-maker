@@ -86,7 +86,7 @@ const CharacterViewer = ({
           className={`text-white ${textSize} text-center mt-2`}
           style={{
             transition: "color 100ms ease-in-out",
-            color: hovered && "#EF4444"
+            color: !hero && hovered && "#EF4444"
           }}
         >{name}
         </p>
