@@ -32,27 +32,33 @@ const DetailView = () => {
 
   return (
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
-      <h2 className="text-4xl text-center">View Character</h2>
+      <h2 className="text-4xl text-center mb-4">View Character</h2>
 
       <div className="flex">
 
-        <div className="m-4">
-          {characterInfo &&
-            <CharacterViewer
-              name={characterInfo.name}
-              skinTone={characterInfo.skinTone}
-              hair={characterInfo.hair}
-              top={characterInfo.top}
-              pants={characterInfo.pants}
-              hero
-            />
-          }
+        <div className="flex flex-col">
+          <div className="text-3xl text-center">Preview</div>
+          <div className="m-4">
+            {characterInfo &&
+              <CharacterViewer
+                name={characterInfo.name}
+                skinTone={characterInfo.skinTone}
+                hair={characterInfo.hair}
+                top={characterInfo.top}
+                pants={characterInfo.pants}
+                hero
+              />
+            }
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1 m-4">
-          <ClothingItem clothes={allHairstyles} name={characterInfo.hair} missingText="No hair" />
-          <ClothingItem clothes={allTops} name={characterInfo.top} missingText="No top" />
-          <ClothingItem clothes={allPants} name={characterInfo.pants} missingText="No pants" />
+        <div className="flex flex-col">
+          <h3 className="text-3xl text-center">Clothing</h3>
+          <div className="flex flex-col gap-1 m-4">
+            <ClothingItem clothes={allHairstyles} name={characterInfo.hair} missingText="No hair" />
+            <ClothingItem clothes={allTops} name={characterInfo.top} missingText="No top" />
+            <ClothingItem clothes={allPants} name={characterInfo.pants} missingText="No pants" />
+          </div>
         </div>
 
       </div>
