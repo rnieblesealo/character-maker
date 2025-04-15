@@ -4,6 +4,7 @@ import supabase from "../scripts/client"
 
 const ViewCharacters = () => {
   const [dbCharacters, setDbCharacters] = useState([])
+  const [lastUpdateTime, setLastUpdateTime] = useState(Date.now()) // not semantically useful; used for reloading purposes
 
   useEffect(() => {
     async function fetchCharacters() {
@@ -18,7 +19,7 @@ const ViewCharacters = () => {
     fetchCharacters()
 
     console.log("this")
-  }, [])
+  }, [lastUpdateTime])
 
   const dbCharacterViewers = dbCharacters?.map((info) => (
     <CharacterViewer
@@ -29,6 +30,7 @@ const ViewCharacters = () => {
       hair={info.hair}
       top={info.top}
       pants={info.pants}
+      setLastUpdateTime={setLastUpdateTime}
     />
   ))
 

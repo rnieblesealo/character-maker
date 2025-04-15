@@ -2,7 +2,7 @@ import CharacterViewer from "../components/CharacterViewer"
 import SkinTonePicker from "../components/SkinTonePicker"
 import ClothingPicker from "../components/ClothingPicker"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import supabase from "../scripts/client"
@@ -24,8 +24,6 @@ const CreateCharacter = () => {
   const [top, setTop] = useState("")
   const [pants, setPants] = useState("")
 
-  const nameInput = useRef(null)
-
   useEffect(() => {
     async function fetchCharacter() {
       // fetch character if entered view with an id (in edit mode)
@@ -45,10 +43,8 @@ const CreateCharacter = () => {
       setSkinTone(characterData.skinTone)
       setName(characterData.name)
       setHair(characterData.hair)
-      setTop(characterData.top)
-      setPants(characterData.pants)
+      setHair(characterData.hair)
 
-      nameInput.current.value = characterData.name
     }
 
     fetchCharacter()
@@ -58,8 +54,6 @@ const CreateCharacter = () => {
     const nameInput = e.target.value
     if (nameInput) {
       setName(nameInput)
-    } else {
-      setName("My Character")
     }
   }
 
@@ -76,29 +70,6 @@ const CreateCharacter = () => {
         pants: pants,
       })
       .select()
-
-    // go to view screen
-    navigate("/")
-  }
-
-  async function handleUpdateCharacter(e) {
-    e.preventDefault()
-
-    const characterId = params.id
-    if (!characterId) {
-      return
-    }
-
-    await supabase
-      .from("characters")
-      .update({
-        name: name,
-        skinTone: skinTone,
-        hair: hair,
-        top: top,
-        pants: pants,
-      })
-      .eq("id", characterId)
 
     // go to view screen
     navigate("/")
@@ -124,7 +95,6 @@ const CreateCharacter = () => {
         <div className="flex items-center mx-4 mb-4">
           <label htmlFor="name" className="w-30">Name</label>
           <input
-            ref={(me) => nameInput.current = me}
             type="text"
             id="name"
             name="name"
@@ -153,19 +123,11 @@ const CreateCharacter = () => {
           set={setPants}
         />
 
-        <div className="flex w-full gap-2 m-4">
-          {!params.id &&
-            <button
-              onClick={handleCreateCharacter}
-              className="w-full p-2 bg-lime-700 rounded-lg"
-            >
-              Create!
-            </button>
-          }
-          <button
-            onClick={handleUpdateCharacter}
-            className="w-full p-2 bg-orange-700 rounded-lg"
-          >
+        <div className="flex w-1/2 gap-2 m-4">
+          <button className="w-full p-2 bg-lime-700 rounded-lg" onClick={handleCreateCharacter}>
+            Create!
+          </button>
+          <button className="w-full p-2 bg-orange-700 rounded-lg">
             Update
           </button>
         </div>

@@ -1,12 +1,14 @@
 import clsx from "clsx"
 
 import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 import allHairstyles from "../data/hairstyles.json"
 import allPants from "../data/pants.json"
 import allSkinTones from "../data/skinTones.json"
 import allTops from "../data/tops.json"
+
+import supabase from "../scripts/client"
 
 import { FaTrash } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
@@ -21,29 +23,40 @@ const CharacterViewer = ({
   hair,
   top,
   pants,
-  hero
+  hero,
+  setLastUpdateTime
 }) => {
+  const navigate = useNavigate() // used instead of link due to nested div
+
   const [hovered, setHovered] = useState(false)
 
-  useEffect(() => {
-    console.log(hovered)
-  }, [hovered])
+  async function handleDeleteCharacter(e) {
+    e.preventDefault()
 
-  const navigate = useNavigate() // used instead of link due to nested div
+    await supabase
+      .from("characters")
+      .delete()
+      .eq("id", id)
+
+    setLastUpdateTime(Date.now())
+  }
 
   const width = clsx(!hero ? "w-40" : "w-50")
   const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
   const extra = clsx(!hero && "cursor-pointer border-1 p-2 rounded-lg transition-all duration-[100ms] hover:border-red-500") // 200ms used to match style bracket, required for hover text color change
 
   // workaround used here to color text red when entire div is hovered
+  // also need to click on user card to actually go even if entire thing's hover mode triggers
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => navigate(`/view/${id}`)}
       className={`${extra} w-min h-min flex flex-col items-center justify-start`}
     >
-      <div className={`${width} relative bg-gray-400 aspect-square rounded-lg`}>
+      <div
+        className={`${width} relative bg-gray-400 aspect-square rounded-lg`}
+        onClick={() => navigate(`/view/${id}`)}
+      >
         <ClothingPart from={allHairstyles} keyName={hair} z={5} />
 
         <BodyPart from={allSkinTones} colorKey={skinTone} partKey="head" z={4} />
@@ -60,16 +73,25 @@ const CharacterViewer = ({
           style={{
             color: !hero && hovered && "#EF4444"
           }}
-        >{name}
+        >
+          {hero && <span className="text-gray-500">"</span>}
+          {name}
+          {hero && <span className="text-gray-500">"</span>}
         </p>
       }
 
       {hovered && !hero &&
         <div className="flex w-full gap-2">
-          <button className="w-full rounded-sm bg-red-800 flex items-center justify-center text-lg p-2">
+          <button
+            className="w-full rounded-sm bg-red-800 flex items-center justify-center text-lg p-2 cursor-pointer"
+            onClick={handleDeleteCharacter}
+          >
             <FaTrash />
           </button>
-          <button className="w-full rounded-sm bg-amber-800 flex items-center justify-center text-lg p-2">
+          <button
+            className="w-full rounded-sm bg-amber-800 flex items-center justify-center text-lg p-2 cursor-pointer"
+            onClick={() => { navigate(`/create/${id}`) } /*  TODO: add takes u to create view */}
+          >
             <FaPencilAlt />
           </button>
         </div>
