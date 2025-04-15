@@ -1,6 +1,7 @@
 import clsx from "clsx"
 
 import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 import allHairstyles from "../data/hairstyles.json"
 import allPants from "../data/pants.json"
@@ -16,11 +17,17 @@ const CharacterViewer = ({
   pants,
   hero
 }) => {
+  const [hovered, setHovered] = useState(false)
+
+  useEffect(() => {
+    console.log(hovered)
+  }, [hovered])
+
   const navigate = useNavigate() // used instead of link due to nested div
 
   const width = clsx(!hero ? "w-40" : "w-50")
-  const textSize = clsx(!hero ? "text-2xl" : "text-3xl")
-  const extra = clsx(!hero && "border-1 p-2 rounded-lg")
+  const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
+  const extra = clsx(!hero && "cursor-pointer border-1 p-2 rounded-lg transition-scale duration-[100ms] hover:scale-[105%] hover:shadow-lg hover:border-red-500") // 200ms used to match style bracket, required for hover text color change
 
   const ClothingItem = ({ from, keyName, z }) => {
     if (keyName in from && from[keyName].asset) {
@@ -54,8 +61,11 @@ const CharacterViewer = ({
     }
   }
 
+  // workaround used here to color text red when entire div is hovered
   return (
     <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       onClick={() => navigate(`/view/${id}`)}
       className={`${extra} w-min flex flex-col items-center justify-center`}
     >
@@ -72,7 +82,14 @@ const CharacterViewer = ({
 
       </div>
       {name &&
-        <p className={`${textSize} text-center mt-2`}>{name}</p>
+        <p
+          className={`text-white ${textSize} text-center mt-2`}
+          style={{
+            transition: "color 100ms ease-in-out",
+            color: hovered && "#EF4444"
+          }}
+        >{name}
+        </p>
       }
     </div>
   )
