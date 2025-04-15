@@ -50,7 +50,7 @@ const CharacterViewer = ({
   }
 
   return (
-    <div className={`${extra} flex flex-col items-center justify-center`}>
+    <div className={`${extra} w-min flex flex-col items-center justify-center`}>
       <div className={`${width} relative bg-gray-400 aspect-square rounded-lg`}>
 
         <ClothingItem from={allHairstyles} keyName={hair} z={5} />

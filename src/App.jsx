@@ -69,9 +69,10 @@ function App() {
     />
   ))
 
-  return (
-    <div className="w-screen h-min bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
+  const characterCreator = (
+    <div className="flex flex-col items-center justify-start">
       <h1 className="text-5xl text-center m-4">Character Creator</h1>
+
       <CharacterViewer
         name={name}
         skinTone={skinTone}
@@ -80,6 +81,7 @@ function App() {
         pants={pants}
         hero
       />
+
       <div className="flex flex-col items-start justify-center m-4">
 
         <div className="flex items-center m-4">
@@ -123,10 +125,23 @@ function App() {
         </div>
 
       </div>
-      <h2 className="text-4xl">My Characters</h2>
-      <div className="grid grid-cols-2 p-4 gap-3">
+
+    </div>
+  )
+
+  const characterViewers = (
+    <div className="flex flex-col items-center justify-start">
+      <h2 className="text-4xl text-center">My Characters</h2>
+      <div className="grid grid-cols-2 p-4 gap-3 w-80">
         {dbCharacterViewers}
       </div>
+    </div>
+  )
+
+  return (
+    <div className="w-screen h-min bg-black text-white font-pixel text-3xl flex flex-col md:flex-row items-center justify-center">
+      {characterCreator}
+      {characterViewers}
     </div>
   )
 }
