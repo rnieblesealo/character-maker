@@ -4,7 +4,7 @@ import MouseTooltip from "./MouseTooltip"
 const ClothingPicker = ({ clothes, name, set }) => {
   const buttons = Object.entries(clothes).map(([name, details]) => {
     return (
-      <button key={name} className="relative w-15 aspect-square bg-gray-400 rounded-md p-2" onClick={() => set(details.asset)}>
+      <button key={name} className="relative w-15 aspect-square bg-gray-400 rounded-md p-2" onClick={() => set(name)}>
         <MouseTooltip text={name} />
         <img
           src={details.icon}

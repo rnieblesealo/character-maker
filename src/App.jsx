@@ -9,16 +9,16 @@ import supabase from "./scripts/client"
 import allTops from "./data/tops.json"
 import allPants from "./data/pants.json"
 import allHairstyles from "./data/hairstyles.json"
+import allSkinTones from "./data/skinTones.json"
 
 function App() {
   const [dbCharacters, setDbCharacters] = useState([])
   const [latestCreateTime, setLatestCreateTime] = useState(0)
+  const [skinTone, setSkinTone] = useState("")
   const [name, setName] = useState("My Character")
   const [hair, setHair] = useState("")
-  const [head, setHead] = useState("")
   const [top, setTop] = useState("")
   const [pants, setPants] = useState("")
-  const [body, setBody] = useState("")
 
   function handleNameChange(e) {
     const nameInput = e.target.value
@@ -34,11 +34,10 @@ function App() {
       .from("characters")
       .insert({
         name: name,
+        skinTone: skinTone,
         hair: hair,
-        head: head,
         top: top,
         pants: pants,
-        body: body
       })
       .select()
 
@@ -63,11 +62,10 @@ function App() {
     <CharacterViewer
       key={info.name}
       name={info.name}
+      skinTone={info.skinTone}
       hair={info.hair}
-      head={info.head}
       top={info.top}
       pants={info.pants}
-      body={info.body}
     />
   ))
 
@@ -76,11 +74,10 @@ function App() {
       <h1 className="text-5xl text-center m-4">Character Creator</h1>
       <CharacterViewer
         name={name}
+        skinTone={skinTone}
         hair={hair}
-        head={head}
         top={top}
         pants={pants}
-        body={body}
         hero
       />
       <div className="flex flex-col items-start justify-center m-4">
@@ -97,8 +94,8 @@ function App() {
         </div>
 
         <SkinTonePicker
-          setBody={setBody}
-          setHead={setHead}
+          skinTones={allSkinTones}
+          set={setSkinTone}
         />
         <ClothingPicker
           clothes={allTops}
