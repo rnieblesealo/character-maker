@@ -1,14 +1,24 @@
 import MouseTooltip from "../components/MouseTooltip"
 
+import { useEffect, useRef } from "react"
+
 import { FaXmark } from "react-icons/fa6";
 
-const StatPicker = ({ icon, fullName, abbrev, set }) => {
+const StatPicker = ({ icon, fullName, abbrev, set, defaultVal }) => {
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (inputRef) {
+      inputRef.current.value = defaultVal
+    }
+  }, [defaultVal])
+
   function handleStatChange(e) {
     // parse out a number
     const numberInput = parseInt(e.target.value)
 
     // clear input if not number
-    if (!numberInput) {
+    if (numberInput !== 0 && !numberInput) {
       e.target.value = ""
       return;
     } else {
@@ -37,12 +47,13 @@ const StatPicker = ({ icon, fullName, abbrev, set }) => {
         <label htmlFor={abbrev} className="mx-2">{abbrev ?? "???"}</label>
       </span>
       <input
+        ref={(me) => inputRef.current = me}
         type="text"
         id={abbrev ?? "???"}
         name={abbrev ?? "???"}
         placeholder="0"
         onChange={handleStatChange}
-        className="text-center bg-gray-800 p-1 aspect-square h-10 focus:outline-0 placeholder:text-gray-600 rounded-lg"
+        className="text-center bg-gray-800 p-1 aspect-square h-10 focus:outline-0 placeholder:text-gray-800 rounded-lg"
       />
     </div>
   )

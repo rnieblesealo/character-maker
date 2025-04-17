@@ -2,6 +2,8 @@ import CharacterViewer from "../components/CharacterViewer"
 import { useState, useEffect } from "react"
 import supabase from "../scripts/client"
 
+
+
 const ViewCharacters = () => {
   const [dbCharacters, setDbCharacters] = useState([])
   const [lastUpdateTime, setLastUpdateTime] = useState(Date.now()) // not semantically useful; used for reloading purposes
@@ -17,8 +19,6 @@ const ViewCharacters = () => {
     }
 
     fetchCharacters()
-
-    console.log("this")
   }, [lastUpdateTime])
 
   const dbCharacterViewers = dbCharacters?.map((info) => (

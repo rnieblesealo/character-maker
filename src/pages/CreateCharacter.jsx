@@ -61,6 +61,11 @@ const CreateCharacter = () => {
       setTop(characterData.top)
       setPants(characterData.pants)
 
+      setHp(characterData.hp)
+      setAttack(characterData.attack)
+      setStamina(characterData.stamina)
+      setDefense(characterData.defense)
+
       nameInput.current.value = characterData.name
     }
 
@@ -119,13 +124,15 @@ const CreateCharacter = () => {
   async function handleUpdateCharacter(e) {
     e.preventDefault()
 
-    // check if char w that name exists, disallow creation if so
-    const dupes = await supabase
+    // check if char w new name exists, disallow creation if so
+    const dupe = await supabase
       .from("characters")
       .select()
       .eq("name", name.trim())
+      .single()
 
-    if (dupes.data.length > 0) {
+    // don't disallow own name since this would be the unique entry
+    if (dupe && dupe.data.name !== name) {
       setDupeExists(true)
       return
     }
@@ -143,6 +150,10 @@ const CreateCharacter = () => {
         hair: hair,
         top: top,
         pants: pants,
+        hp: hp,
+        attack: attack,
+        defense: defense,
+        stamina: stamina
       })
       .eq("id", characterId)
 
@@ -170,10 +181,10 @@ const CreateCharacter = () => {
         {dupeExists && <p className="text-red-500">A character with this name already exists; try another one!</p>}
 
         <div className="flex justify-center items-center gap-3 border-1 py-3 m-6 h-min rounded-lg w-full">
-          <StatPicker icon={<FaHeart />} fullName="Health" abbrev="HP" set={setHp} />
-          <StatPicker icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" set={setDefense} />
-          <StatPicker icon={<PiSwordFill />} fullName="Attack" abbrev=" ATK" set={setAttack} />
-          <StatPicker icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" set={setStamina} />
+          <StatPicker icon={<FaHeart />} fullName="Health" abbrev="HP" set={setHp} defaultVal={hp} />
+          <StatPicker icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" set={setDefense} defaultVal={defense} />
+          <StatPicker icon={<PiSwordFill />} fullName="Attack" abbrev=" ATK" set={setAttack} defaultVal={attack} />
+          <StatPicker icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" set={setStamina} defaultVal={stamina} />
         </div>
 
       </div>

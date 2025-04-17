@@ -2,6 +2,7 @@ import supabase from "../scripts/client"
 
 import CharacterViewer from "../components/CharacterViewer"
 import ClothingItem from "../components/ClothingItem"
+import StatItem from "../components/StatItem"
 
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
@@ -9,6 +10,11 @@ import { useParams, useNavigate } from "react-router-dom"
 import allHairstyles from "../data/hairstyles.json"
 import allPants from "../data/pants.json"
 import allTops from "../data/tops.json"
+
+import { FaHeart } from "react-icons/fa";
+import { PiSwordFill } from "react-icons/pi";
+import { FaShieldAlt } from "react-icons/fa";
+import { FaBoltLightning } from "react-icons/fa6";
 
 const DetailView = () => {
   const params = useParams()
@@ -61,6 +67,13 @@ const DetailView = () => {
             </div>
           </div>
 
+        </div>
+
+        <div className="w-full rounded-lg mt-4 mb-8 p-4 flex items-center justify-center gap-4">
+          <StatItem icon={<FaHeart />} fullName="Health" abbrev="HP" value={characterInfo.hp} />
+          <StatItem icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" value={characterInfo.defense} />
+          <StatItem icon={<PiSwordFill />} fullName="Attack" abbrev=" ATK" value={characterInfo.attack} />
+          <StatItem icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" value={characterInfo.stamina} />
         </div>
 
         <button
