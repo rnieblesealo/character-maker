@@ -30,17 +30,20 @@ const StatPicker = ({ icon, fullName, abbrev, set }) => {
   }
 
   return (
-    <div className="relative flex items-center">
-      <MouseTooltip text={fullName ?? (abbrev ?? "???")} />
-      <span className="text-2xl">{icon ?? <FaXmark />}</span>
-      <label htmlFor={abbrev} className="mx-2">{abbrev ?? "???"}</label>
+    <div className="flex items-center">
+      <span className="flex items-center relative text-2xl">
+        <MouseTooltip text={fullName ?? (abbrev ?? "???")} />
+        {icon ?? <FaXmark />}
+        <label htmlFor={abbrev} className="mx-2">{abbrev ?? "???"}</label>
+      </span>
       <input
         type="text"
         id={abbrev ?? "???"}
         name={abbrev ?? "???"}
         placeholder="0"
         onChange={handleStatChange}
-        className="text-center bg-gray-800 p-1 aspect-square h-10 focus:outline-0 placeholder:text-gray-600 rounded-lg" />
+        className="text-center bg-gray-800 p-1 aspect-square h-10 focus:outline-0 placeholder:text-gray-600 rounded-lg"
+      />
     </div>
   )
 }
