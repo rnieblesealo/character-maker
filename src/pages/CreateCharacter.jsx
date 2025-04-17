@@ -37,6 +37,7 @@ const CreateCharacter = () => {
 
   const [dupeExists, setDupeExists] = useState(false)
   const [didFetchCharacter, setDidFetchCharacter] = useState(false)
+  const [didSetName, setDidSetName] = useState(false)
   const [committed, setCommitted] = useState(false)
 
   const nameInput = useRef(null)
@@ -76,13 +77,19 @@ const CreateCharacter = () => {
   }, [didFetchCharacter, params.id])
 
   useEffect(() => {
-    if (didFetchCharacter) {
-      nameInput.current.value = name
+    if (!params.id) {
+      setDidFetchCharacter(true)
     }
-  }, [didFetchCharacter, name])
+
+    if (didFetchCharacter && !didSetName) {
+      nameInput.current.value = name
+      setDidSetName(true)
+    }
+  }, [didFetchCharacter, didSetName, name, params.id])
 
   function handleNameChange(e) {
     const givenName = e.target.value
+
     if (givenName) {
       setName(givenName.trim())
     } else {
