@@ -22,6 +22,8 @@ const DetailView = () => {
 
   const [characterInfo, setCharacterInfo] = useState({})
 
+  const [didFetchCharacters, setDidFetchCharacters] = useState(false)
+
   useEffect(() => {
     async function fetchCharacter() {
       const characterId = params.id
@@ -32,13 +34,15 @@ const DetailView = () => {
         .single() // NOTE: expects only 1 row to be returned
 
       setCharacterInfo(character.data)
+
+      setDidFetchCharacters(true)
     }
 
     fetchCharacter()
   }, [params.id])
 
-  return (
-    <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
+  const content = (
+    <div>
       <h2 className="text-4xl text-center mb-4">View Character</h2>
 
       <div className="flex flex-col">
@@ -83,6 +87,15 @@ const DetailView = () => {
         </button>
 
       </div>
+    </div>
+  )
+
+  return (
+    <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
+      {didFetchCharacters
+        ? content
+        : <span>Fetching...</span>
+      }
     </div>
   )
 }

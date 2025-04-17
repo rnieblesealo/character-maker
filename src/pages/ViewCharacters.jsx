@@ -6,7 +6,9 @@ import supabase from "../scripts/client"
 
 const ViewCharacters = () => {
   const [dbCharacters, setDbCharacters] = useState([])
+
   const [lastUpdateTime, setLastUpdateTime] = useState(Date.now()) // not semantically useful; used for reloading purposes
+  const [didFetchCharacters, setDidFetchCharacters] = useState(false)
 
   useEffect(() => {
     async function fetchCharacters() {
@@ -16,6 +18,8 @@ const ViewCharacters = () => {
         .order("created_at", { ascending: true })
 
       setDbCharacters(characters?.data)
+
+      setDidFetchCharacters(true)
     }
 
     fetchCharacters()
@@ -34,12 +38,21 @@ const ViewCharacters = () => {
     />
   ))
 
-  return (
-    <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
+  const content = (
+    <div>
       <h2 className="text-4xl text-center">View All Characters</h2>
       <div className="flex flex-wrap p-4 gap-3 w-100">
         {dbCharacterViewers}
       </div>
+    </div>
+  )
+
+  return (
+    <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
+      {didFetchCharacters
+        ? content
+        : <span>Fetching...</span>
+      }
     </div>
   )
 }

@@ -36,6 +36,8 @@ const CreateCharacter = () => {
   const [defense, setDefense] = useState(0)
 
   const [dupeExists, setDupeExists] = useState(false)
+  const [didFetchCharacter, setDidFetchCharacter] = useState(false)
+  const [committed, setCommitted] = useState(false)
 
   const nameInput = useRef(null)
 
@@ -66,11 +68,18 @@ const CreateCharacter = () => {
       setStamina(characterData.stamina)
       setDefense(characterData.defense)
 
-      nameInput.current.value = characterData.name
+      // say we fetched char
+      setDidFetchCharacter(true)
     }
 
     fetchCharacter()
-  }, [params.id])
+  }, [didFetchCharacter, params.id])
+
+  useEffect(() => {
+    if (didFetchCharacter) {
+      nameInput.current.value = name
+    }
+  }, [didFetchCharacter, name])
 
   function handleNameChange(e) {
     const givenName = e.target.value
@@ -102,6 +111,10 @@ const CreateCharacter = () => {
     }
 
     // if not do normal creation
+
+    // show that we committed create
+    setCommitted(true)
+
     await supabase
       .from("characters")
       .insert({
@@ -137,11 +150,16 @@ const CreateCharacter = () => {
       return
     }
 
+    // get id from params
     const characterId = params.id
     if (!characterId) {
       return
     }
 
+    // show that we're doing the update
+    setCommitted(true)
+
+    // perform the update
     await supabase
       .from("characters")
       .update({
@@ -157,12 +175,13 @@ const CreateCharacter = () => {
       })
       .eq("id", characterId)
 
-    // go to view screen
+
+    // go to view screen once done
     navigate("/")
   }
 
-  return (
-    <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center">
+  const content = (
+    <div>
       <h2 className="text-4xl text-center">
         {params.id ? <span>Update Character</span> : <span>Create Character</span>}
       </h2>
@@ -256,6 +275,16 @@ const CreateCharacter = () => {
         </div>
 
       </div>
+    </div>
+  )
+
+  return (
+    <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center">
+      {/* This reads like shit */}
+      {didFetchCharacter
+        ? (committed ? (params.id ? <span>Updating...</span> : <span>Creating...</span>) : content)
+        : <span>Fetching...</span>
+      }
     </div >
   )
 }
