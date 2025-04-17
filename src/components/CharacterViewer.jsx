@@ -43,7 +43,7 @@ const CharacterViewer = ({
 
   const width = clsx(!hero ? "w-40" : "w-50")
   const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
-  const extra = clsx(!hero && "cursor-pointer border-1 p-2 rounded-lg transition-all duration-[100ms] hover:border-red-500") // 200ms used to match style bracket, required for hover text color change
+  const extra = clsx(!hero && "cursor-pointer border-1 p-2 rounded-lg hover:border-red-500") // 200ms used to match style bracket, required for hover text color change
 
   // workaround used here to color text red when entire div is hovered
   // also need to click on user card to actually go even if entire thing's hover mode triggers
@@ -83,13 +83,13 @@ const CharacterViewer = ({
       {hovered && !hero &&
         <div className="flex w-full gap-2">
           <button
-            className="w-full rounded-sm bg-red-800 flex items-center justify-center text-lg p-2 cursor-pointer"
+            className="w-full rounded-sm bg-red-800 hover:bg-red-900 active:bg-red-950 flex items-center justify-center text-lg p-2 cursor-pointer"
             onClick={handleDeleteCharacter}
           >
             <FaTrash />
           </button>
           <button
-            className="w-full rounded-sm bg-amber-800 flex items-center justify-center text-lg p-2 cursor-pointer"
+            className="w-full rounded-sm bg-amber-800 hover:bg-amber-900 active:bg-amber-950 flex items-center justify-center text-lg p-2 cursor-pointer"
             onClick={() => { navigate(`/create/${id}`) } /*  TODO: add takes u to create view */}
           >
             <FaPencilAlt />

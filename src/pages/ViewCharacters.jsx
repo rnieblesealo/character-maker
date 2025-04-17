@@ -36,7 +36,7 @@ const ViewCharacters = () => {
 
   return (
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
-      <h2 className="text-4xl text-center">View Characters</h2>
+      <h2 className="text-4xl text-center">View All Characters</h2>
       <div className="flex flex-wrap p-4 gap-3 w-100">
         {dbCharacterViewers}
       </div>

@@ -1,7 +1,6 @@
 import CharacterViewer from "../components/CharacterViewer"
 import SkinTonePicker from "../components/SkinTonePicker"
 import ClothingPicker from "../components/ClothingPicker"
-import StatPicker from "../components/StatPicker"
 
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
@@ -15,11 +14,6 @@ import allSkinTones from "../data/skinTones.json"
 
 import { useParams } from "react-router-dom"
 
-import { FaHeart } from "react-icons/fa";
-import { PiSwordFill } from "react-icons/pi";
-import { FaShieldAlt } from "react-icons/fa";
-import { FaBoltLightning } from "react-icons/fa6";
-
 const CreateCharacter = () => {
   const navigate = useNavigate()
   const params = useParams()
@@ -29,11 +23,6 @@ const CreateCharacter = () => {
   const [hair, setHair] = useState("")
   const [top, setTop] = useState("")
   const [pants, setPants] = useState("")
-
-  const [hp, setHp] = useState(0)
-  const [stamina, setStamina] = useState(0)
-  const [attack, setAttack] = useState(0)
-  const [defense, setDefense] = useState(0)
 
   const [dupeExists, setDupeExists] = useState(false)
 
@@ -115,17 +104,6 @@ const CreateCharacter = () => {
   async function handleUpdateCharacter(e) {
     e.preventDefault()
 
-    // check if char w that name exists, disallow creation if so
-    const dupes = await supabase
-      .from("characters")
-      .select()
-      .eq("name", name.trim())
-
-    if (dupes.data.length > 0) {
-      setDupeExists(true)
-      return
-    }
-
     const characterId = params.id
     if (!characterId) {
       return
@@ -148,9 +126,7 @@ const CreateCharacter = () => {
 
   return (
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center">
-      <h2 className="text-4xl text-center">
-        {params.id ? <span>Update Character</span> : <span>Create Character</span>}
-      </h2>
+      <h2 className="text-4xl text-center">Create or Update Character</h2>
 
       <div className="p-4 flex flex-col items-center justify-center">
 
@@ -164,15 +140,6 @@ const CreateCharacter = () => {
         />
 
         {dupeExists && <p className="text-red-500">A character with this name already exists; try another one!</p>}
-
-        <div className="flex justify-center items-center gap-3 border-1 py-3 m-6 h-min rounded-lg w-full">
-
-          <StatPicker icon={<FaHeart />} abbrev="HP" set={setHp} />
-          <StatPicker icon={<FaShieldAlt />} abbrev="DEF" set={setDefense} />
-          <StatPicker icon={<PiSwordFill />} abbrev="ATK" set={setAttack} />
-          <StatPicker icon={<FaBoltLightning />} abbrev="STA" set={setStamina} />
-
-        </div>
 
       </div>
 
@@ -189,8 +156,6 @@ const CreateCharacter = () => {
             onChange={handleNameChange}
             className="bg-gray-800 p-1 pl-3 focus:outline-0 placeholder:text-gray-600 rounded-lg w-[188px]" />
         </div>
-
-
 
         <SkinTonePicker
           skinTones={allSkinTones}
@@ -212,7 +177,6 @@ const CreateCharacter = () => {
           set={setPants}
         />
 
-
         <div className="flex w-full gap-2 m-4">
 
           <button
@@ -222,14 +186,12 @@ const CreateCharacter = () => {
             Cancel
           </button>
 
-          {params.id &&
-            <button
-              onClick={handleUpdateCharacter}
-              className="w-full p-2 bg-amber-800 hover:bg-amber-900 active:bg-amber-950 rounded-lg"
-            >
-              Update
-            </button>
-          }
+          <button
+            onClick={handleUpdateCharacter}
+            className="w-full p-2 bg-amber--700 rounded-lg"
+          >
+            Update
+          </button>
 
           {!params.id &&
             <button
@@ -246,7 +208,7 @@ const CreateCharacter = () => {
         </div>
 
       </div>
-    </div >
+    </div>
   )
 }
 
