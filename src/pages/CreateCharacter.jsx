@@ -105,6 +105,10 @@ const CreateCharacter = () => {
         hair: hair,
         top: top,
         pants: pants,
+        hp: hp,
+        attack: attack,
+        defense: defense,
+        stamina: stamina
       })
       .select()
 
@@ -166,12 +170,10 @@ const CreateCharacter = () => {
         {dupeExists && <p className="text-red-500">A character with this name already exists; try another one!</p>}
 
         <div className="flex justify-center items-center gap-3 border-1 py-3 m-6 h-min rounded-lg w-full">
-
-          <StatPicker icon={<FaHeart />} abbrev="HP" set={setHp} />
-          <StatPicker icon={<FaShieldAlt />} abbrev="DEF" set={setDefense} />
-          <StatPicker icon={<PiSwordFill />} abbrev="ATK" set={setAttack} />
-          <StatPicker icon={<FaBoltLightning />} abbrev="STA" set={setStamina} />
-
+          <StatPicker icon={<FaHeart />} fullName="Health" abbrev="HP" set={setHp} />
+          <StatPicker icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" set={setDefense} />
+          <StatPicker icon={<PiSwordFill />} fullName="Attack" abbrev=" ATK" set={setAttack} />
+          <StatPicker icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" set={setStamina} />
         </div>
 
       </div>
@@ -189,8 +191,6 @@ const CreateCharacter = () => {
             onChange={handleNameChange}
             className="bg-gray-800 p-1 pl-3 focus:outline-0 placeholder:text-gray-600 rounded-lg w-[188px]" />
         </div>
-
-
 
         <SkinTonePicker
           skinTones={allSkinTones}
@@ -211,7 +211,6 @@ const CreateCharacter = () => {
           name="Pants"
           set={setPants}
         />
-
 
         <div className="flex w-full gap-2 m-4">
 

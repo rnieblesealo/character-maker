@@ -1,6 +1,8 @@
+import MouseTooltip from "../components/MouseTooltip"
+
 import { FaXmark } from "react-icons/fa6";
 
-const StatPicker = ({ icon, abbrev, set }) => {
+const StatPicker = ({ icon, fullName, abbrev, set }) => {
   function handleStatChange(e) {
     // parse out a number
     const numberInput = parseInt(e.target.value)
@@ -28,8 +30,9 @@ const StatPicker = ({ icon, abbrev, set }) => {
   }
 
   return (
-    <div className="flex items-center">
-      <span>{icon ?? <FaXmark />}</span>
+    <div className="relative flex items-center">
+      <MouseTooltip text={fullName ?? (abbrev ?? "???")} />
+      <span className="text-2xl">{icon ?? <FaXmark />}</span>
       <label htmlFor={abbrev} className="mx-2">{abbrev ?? "???"}</label>
       <input
         type="text"
