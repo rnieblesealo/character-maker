@@ -55,7 +55,11 @@ const CharacterViewer = ({
     >
       <div
         className={`${width} relative bg-gray-400 aspect-square rounded-lg`}
-        onClick={() => navigate(`/view/${id}`)}
+        onClick={() => {
+          if (!hero) {
+            navigate(`/view/${id}`)
+          }
+        }}
       >
         <ClothingPart from={allHairstyles} keyName={hair} z={5} />
 
