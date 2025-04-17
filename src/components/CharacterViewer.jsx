@@ -29,9 +29,12 @@ const CharacterViewer = ({
   const navigate = useNavigate() // used instead of link due to nested div
 
   const [hovered, setHovered] = useState(false)
+  const [deleteInProgress, setDeleteInProgress] = useState(false)
 
   async function handleDeleteCharacter(e) {
     e.preventDefault()
+
+    setDeleteInProgress(true)
 
     await supabase
       .from("characters")
@@ -43,7 +46,10 @@ const CharacterViewer = ({
 
   const width = clsx(!hero ? "w-40" : "w-50")
   const textSize = clsx(!hero ? "text-2xl" : "text-4xl")
-  const extra = clsx(!hero && "cursor-pointer border-1 p-2 rounded-lg hover:border-red-500") // 200ms used to match style bracket, required for hover text color change
+  const nonHeroExtras = clsx(
+    !hero && "cursor-pointer border-1 p-2 rounded-lg hover:border-red-500",
+    deleteInProgress && "grayscale" // used to indicate blocking interaction
+  )
 
   // workaround used here to color text red when entire div is hovered
   // also need to click on user card to actually go even if entire thing's hover mode triggers
@@ -51,7 +57,7 @@ const CharacterViewer = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`${extra} w-min h-min flex flex-col items-center justify-start`}
+      className={`${nonHeroExtras} w-min h-min flex flex-col items-center justify-start saturation-0`}
     >
       <div
         className={`${width} relative bg-gray-400 aspect-square rounded-lg`}

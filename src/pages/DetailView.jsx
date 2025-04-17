@@ -3,6 +3,7 @@ import supabase from "../scripts/client"
 import CharacterViewer from "../components/CharacterViewer"
 import ClothingItem from "../components/ClothingItem"
 import StatItem from "../components/StatItem"
+import Loader from "../components/Loader"
 
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
@@ -45,7 +46,7 @@ const DetailView = () => {
     <div>
       <h2 className="text-4xl text-center mb-4">View Character</h2>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center">
         <div className="flex flex-row">
 
           <div className="m-2">
@@ -82,7 +83,7 @@ const DetailView = () => {
 
         <button
           onClick={() => navigate("/")}
-          className="text-white hover:text-red-500 border-1 hover:border-red-500 rounded-lg flex items-center justify-center">
+          className="w-full text-white hover:text-red-500 border-1 hover:border-red-500 rounded-lg flex items-center justify-center">
           Back
         </button>
 
@@ -94,7 +95,7 @@ const DetailView = () => {
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
       {didFetchCharacters
         ? content
-        : <span>Fetching...</span>
+        : <Loader text="Fetching..."/> 
       }
     </div>
   )

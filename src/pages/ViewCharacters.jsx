@@ -1,8 +1,7 @@
 import CharacterViewer from "../components/CharacterViewer"
 import { useState, useEffect } from "react"
 import supabase from "../scripts/client"
-
-
+import Loader from "../components/Loader"
 
 const ViewCharacters = () => {
   const [dbCharacters, setDbCharacters] = useState([])
@@ -51,7 +50,7 @@ const ViewCharacters = () => {
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
       {didFetchCharacters
         ? content
-        : <span>Fetching...</span>
+        : <Loader text="Fetching..." />
       }
     </div>
   )

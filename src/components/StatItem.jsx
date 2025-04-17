@@ -7,7 +7,7 @@ const StatItem = ({ icon, fullName, abbrev, value }) => {
       <span className="flex items-center relative text-2xl">
         <MouseTooltip text={fullName ?? (abbrev ?? "???")} />
         {icon ?? <FaXmark />}
-        <span className="mx-2">{value ?? "?"}</span>
+        <span className="mx-2">{value ?? "?"} {fullName ?? "???"}</span>
       </span>
     </div>
   )

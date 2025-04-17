@@ -2,6 +2,7 @@ import CharacterViewer from "../components/CharacterViewer"
 import SkinTonePicker from "../components/SkinTonePicker"
 import ClothingPicker from "../components/ClothingPicker"
 import StatPicker from "../components/StatPicker"
+import Loader from "../components/Loader"
 
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
@@ -289,8 +290,8 @@ const CreateCharacter = () => {
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center">
       {/* This reads like shit */}
       {didFetchCharacter
-        ? (committed ? (params.id ? <span>Updating...</span> : <span>Creating...</span>) : content)
-        : <span>Fetching...</span>
+        ? (committed ? <Loader text={params.id ? "Updating..." : "Creating..."} /> : content)
+        : <Loader text="Fetching..." />
       }
     </div >
   )
