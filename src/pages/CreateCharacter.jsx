@@ -81,7 +81,7 @@ const CreateCharacter = () => {
       setDidFetchCharacter(true)
     }
 
-    if (didFetchCharacter && !didSetName) {
+    if (didFetchCharacter && !didSetName && params.id) {
       nameInput.current.value = name
       setDidSetName(true)
     }
