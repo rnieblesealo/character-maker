@@ -2,6 +2,7 @@ import CharacterViewer from "../components/CharacterViewer"
 import SkinTonePicker from "../components/SkinTonePicker"
 import ClothingPicker from "../components/ClothingPicker"
 import StatPicker from "../components/StatPicker"
+import ClassPicker from "../components/ClassPicker"
 import Loader from "../components/Loader"
 
 import { useState, useEffect, useRef } from "react"
@@ -20,6 +21,13 @@ import { FaHeart } from "react-icons/fa";
 import { PiSwordFill } from "react-icons/pi";
 import { FaShieldAlt } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
+import { GiMuscleUp } from "react-icons/gi";
+import { GiCrystalBall } from "react-icons/gi";
+import { GiCrossbow } from "react-icons/gi";
+import { GiMagicPalm } from "react-icons/gi";
+import { GiBlackBook } from "react-icons/gi";
+
+import charClasses from "../data/charClasses.json"
 
 const CreateCharacter = () => {
   const navigate = useNavigate()
@@ -31,11 +39,19 @@ const CreateCharacter = () => {
   const [top, setTop] = useState("")
   const [pants, setPants] = useState("")
 
+  // base stats
   const [hp, setHp] = useState(0)
-  const [stamina, setStamina] = useState(0)
-  const [attack, setAttack] = useState(0)
   const [defense, setDefense] = useState(0)
+  const [stamina, setStamina] = useState(0)
 
+  const [charClass, setCharClass] = useState(charClasses.brawler)
+
+  // special stats
+  const [str, setStr] = useState(0) // brawler 
+  const [arc, setArc] = useState(0) // psychic
+  const [int, setInt] = useState(0) // ranger
+
+  // state
   const [dupeExists, setDupeExists] = useState(false)
   const [didFetchCharacter, setDidFetchCharacter] = useState(false)
   const [didSetName, setDidSetName] = useState(false)
@@ -65,10 +81,15 @@ const CreateCharacter = () => {
       setTop(characterData.top)
       setPants(characterData.pants)
 
+      // base stats
       setHp(characterData.hp)
-      setAttack(characterData.attack)
-      setStamina(characterData.stamina)
       setDefense(characterData.defense)
+      setStamina(characterData.stamina)
+
+      // special stat
+      setStr(characterData.str)
+      setArc(characterData.arc)
+      setInt(characterData.int)
 
       // say we fetched char
       setDidFetchCharacter(true)
@@ -207,11 +228,20 @@ const CreateCharacter = () => {
 
         {dupeExists && <p className="text-red-500">A character with this name already exists; try another one!</p>}
 
-        <div className="flex justify-center items-center gap-3 border-1 py-3 m-6 h-min rounded-lg w-full">
+        <div className="flex justify-center items-center items-stretch gap-3 h-min rounded-lg w-full">
+          <ClassPicker icon={<GiMuscleUp />} classData={charClasses.brawler} get={charClass} set={setCharClass} />
+          <ClassPicker icon={<GiCrystalBall />} classData={charClasses.psychic} get={charClass} set={setCharClass} />
+          <ClassPicker icon={<GiCrossbow />} classData={charClasses.ranger} get={charClass} set={setCharClass} />
+        </div>
+
+        <div className="flex justify-center items-center gap-3 py-3 mb-6 h-min rounded-lg w-full">
           <StatPicker icon={<FaHeart />} fullName="Health" abbrev="HP" set={setHp} defaultVal={hp} />
           <StatPicker icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" set={setDefense} defaultVal={defense} />
-          <StatPicker icon={<PiSwordFill />} fullName="Attack" abbrev=" ATK" set={setAttack} defaultVal={attack} />
           <StatPicker icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" set={setStamina} defaultVal={stamina} />
+
+          {charClass === charClasses.brawler && <StatPicker icon={<PiSwordFill />} fullName="Strength" abbrev="STR" set={setStr} defaultVal={str} color={charClasses.brawler.color} />}
+          {charClass === charClasses.psychic && <StatPicker icon={<GiMagicPalm />} fullName="Arcane" abbrev="ARC" set={setArc} defaultVal={arc} color={charClasses.psychic.color} />}
+          {charClass === charClasses.ranger && <StatPicker icon={<GiBlackBook />} fullName="Intelligence" abbrev="INT" set={setInt} defaultVal={int} color={charClasses.ranger.color} />}
         </div>
 
       </div>

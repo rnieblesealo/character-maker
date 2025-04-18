@@ -10,7 +10,6 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-
 - [x] **The web app contains a page that features a create form to add a new crewmate**
   - Users can name the crewmate
   - Users can set the crewmate’s attributes by clicking on one of several values
@@ -32,6 +31,12 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [ ] A crewmate can be given a category upon creation which restricts their attribute value options
+    - Class
+    - The class determines which stat attributes we can set
+    - Baseline ones are HP, DEF, STA, highlight white
+        - Brawlers have STR
+        - Psychics have ARC
+        - Rangers have INT 
   - e.g., a Dungeons and Dragons class or a development team role (project manager, product owner, etc.)
   - User can choose a `category` option to describe their crewmate before any attributes are specified
   - Based on the category value, users are allowed to access only a subset of the possible attributes

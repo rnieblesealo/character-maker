@@ -1,0 +1,14 @@
+{
+  "brawler": {
+    "fullName": "Brawler",
+    "color": "oklch(63.7% 0.237 25.331)"
+  },
+  "psychic":{
+    "fullName": "Psychic",
+    "color": "oklch(58.5% 0.233 277.117)"
+  },
+  "ranger":{
+    "fullName": "Ranger",
+    "color": "oklch(75% 0.183 55.934)"
+  }
+}

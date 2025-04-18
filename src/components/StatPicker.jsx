@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 
 import { FaXmark } from "react-icons/fa6";
 
-const StatPicker = ({ icon, fullName, abbrev, set, defaultVal }) => {
+const StatPicker = ({ icon, fullName, abbrev, set, defaultVal, color }) => {
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -43,8 +43,14 @@ const StatPicker = ({ icon, fullName, abbrev, set, defaultVal }) => {
     <div className="flex items-center">
       <span className="flex items-center relative text-2xl">
         <MouseTooltip text={fullName ?? (abbrev ?? "???")} />
-        {icon ?? <FaXmark />}
-        <label htmlFor={abbrev} className="mx-2">{abbrev ?? "???"}</label>
+        <span
+          style={{ color: color ?? "white" }}
+        >
+          {icon ?? <FaXmark />}
+        </span>
+        <label htmlFor={abbrev} className="mx-2 w-10 text-center overflow-hidden" style={{ color: color ?? "white" }}>
+          {abbrev ?? "???"}
+        </label>
       </span>
       <input
         ref={(me) => inputRef.current = me}
