@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import supabase from "../scripts/client"
 import Loader from "../components/Loader"
 
+import charClasses from "../data/charClasses.json"
+
 const ViewCharacters = () => {
   const [dbCharacters, setDbCharacters] = useState([])
 
@@ -33,6 +35,17 @@ const ViewCharacters = () => {
       hair={info.hair}
       top={info.top}
       pants={info.pants}
+
+      hp={info.hp}
+      def={info.def}
+      sta={info.sta}
+
+      str={info.str}
+      arc={info.arc}
+      int={info.int}
+
+      charClass={charClasses[info.class]}
+
       setLastUpdateTime={setLastUpdateTime}
     />
   ))

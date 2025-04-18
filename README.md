@@ -30,7 +30,7 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] A crewmate can be given a category upon creation which restricts their attribute value options
+- [x] A crewmate can be given a category upon creation which restricts their attribute value options
     - Class
     - The class determines which stat attributes we can set
     - Baseline ones are HP, DEF, STA, highlight white
@@ -42,8 +42,10 @@ The following **optional** features are implemented:
   - Based on the category value, users are allowed to access only a subset of the possible attributes
 - [ ] A section of the summary page, displays summary statistics about a user’s crew on their crew page
   - e.g., the percent of members with a certain attribute 
+    - Combined stats
 - [ ] The summary page displays a custom “success” metric about a user’s crew which changes the look of the crewmate list
   - e.g., a pirate crew’s predicted success at commandeering a new galley
+    - Take majority class and change BG theme to it
 
 
 The following **additional** features are implemented:
