@@ -16,12 +16,20 @@ import { FaHeart } from "react-icons/fa";
 import { PiSwordFill } from "react-icons/pi";
 import { FaShieldAlt } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
+import { GiMuscleUp } from "react-icons/gi";
+import { GiCrystalBall } from "react-icons/gi";
+import { GiCrossbow } from "react-icons/gi";
+import { GiMagicPalm } from "react-icons/gi";
+import { GiBlackBook } from "react-icons/gi";
+
+import charClasses from "../data/charClasses.json"
 
 const DetailView = () => {
   const params = useParams()
   const navigate = useNavigate()
 
   const [characterInfo, setCharacterInfo] = useState({})
+  const [characterClass, setCharacterClass] = useState({})
 
   const [didFetchCharacters, setDidFetchCharacters] = useState(false)
 
@@ -35,12 +43,13 @@ const DetailView = () => {
         .single() // NOTE: expects only 1 row to be returned
 
       setCharacterInfo(character.data)
+      setCharacterClass(charClasses[characterInfo.class])
 
       setDidFetchCharacters(true)
     }
 
     fetchCharacter()
-  }, [params.id])
+  }, [characterInfo.class, params.id])
 
   const content = (
     <div>
@@ -74,11 +83,33 @@ const DetailView = () => {
 
         </div>
 
-        <div className="w-full rounded-lg mt-4 mb-8 p-4 flex items-center justify-center gap-4">
+        <div className="h-20 aspect-square flex items-center justify-center text-4xl" style={{ color: characterClass?.color ?? "white" }}>
+          <span className="mr-2">
+            {characterClass === charClasses.brawler && <GiMuscleUp />}
+            {characterClass === charClasses.psychic && <GiCrystalBall />}
+            {characterClass === charClasses.ranger && <GiCrossbow />}
+          </span>
+
+          <span>
+            {characterClass?.fullName}
+          </span>
+        </div>
+
+        <div className="w-full rounded-lg mb-8 p-4 flex items-center justify-center gap-4">
           <StatItem icon={<FaHeart />} fullName="Health" abbrev="HP" value={characterInfo.hp} />
-          <StatItem icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" value={characterInfo.defense} />
-          <StatItem icon={<PiSwordFill />} fullName="Attack" abbrev=" ATK" value={characterInfo.attack} />
-          <StatItem icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" value={characterInfo.stamina} />
+          <StatItem icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" value={characterInfo.def} />
+          <StatItem icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" value={characterInfo.sta} />
+
+          {characterClass === charClasses.brawler &&
+            <StatItem icon={<PiSwordFill />} fullName="Strength" abbrev="STR" value={characterInfo.str} color={characterClass.color} />
+          }
+          {characterClass === charClasses.psychic &&
+            <StatItem icon={<GiMagicPalm />} fullName="Arcane" abbrev="ARC" value={characterInfo.arc} color={characterClass.color} />
+          }
+          {characterClass === charClasses.ranger &&
+            <StatItem icon={<GiBlackBook />} fullName="Intelligence" abbrev="INT" value={characterInfo.int} color={characterClass.color} />
+          }
+
         </div>
 
         <button
@@ -95,7 +126,7 @@ const DetailView = () => {
     <div className="h-min w-screen bg-black text-white font-pixel text-3xl flex flex-col items-center justify-start">
       {didFetchCharacters
         ? content
-        : <Loader text="Fetching..."/> 
+        : <Loader text="Fetching..." />
       }
     </div>
   )
