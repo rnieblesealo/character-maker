@@ -123,7 +123,7 @@ const CharacterViewer = ({
       }
 
       {name &&
-        <p
+        <span
           className={`text-white ${textSize} text-center mb-2 flex items-center`}
           style={{
             color: !hero && hovered && "#EF4444"
@@ -147,7 +147,7 @@ const CharacterViewer = ({
           {hero && <span className="text-gray-500">"</span>}
           {name}
           {hero && <span className="text-gray-500">"</span>}
-        </p>
+        </span>
       }
 
       {hovered && !hero &&
