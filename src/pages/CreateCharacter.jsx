@@ -41,8 +41,8 @@ const CreateCharacter = () => {
 
   // base stats
   const [hp, setHp] = useState(0)
-  const [defense, setDefense] = useState(0)
-  const [stamina, setStamina] = useState(0)
+  const [def, setDef] = useState(0)
+  const [sta, setSta] = useState(0)
 
   const [charClass, setCharClass] = useState(charClasses.brawler)
 
@@ -83,13 +83,15 @@ const CreateCharacter = () => {
 
       // base stats
       setHp(characterData.hp)
-      setDefense(characterData.defense)
-      setStamina(characterData.stamina)
+      setDef(characterData.def)
+      setSta(characterData.sta)
 
       // special stat
       setStr(characterData.str)
       setArc(characterData.arc)
       setInt(characterData.int)
+
+      setCharClass(charClasses[characterData.class])
 
       // say we fetched char
       setDidFetchCharacter(true)
@@ -152,10 +154,16 @@ const CreateCharacter = () => {
         hair: hair,
         top: top,
         pants: pants,
+
         hp: hp,
-        attack: attack,
-        defense: defense,
-        stamina: stamina
+        def: def,
+        sta: sta,
+
+        str: str,
+        arc: arc,
+        int: int,
+
+        class: Object.keys(charClasses).find((key) => charClasses[key] === charClass) // set class attr in db to the key of the currently set class
       })
       .select()
 
@@ -197,10 +205,16 @@ const CreateCharacter = () => {
         hair: hair,
         top: top,
         pants: pants,
+
         hp: hp,
-        attack: attack,
-        defense: defense,
-        stamina: stamina
+        def: def,
+        sta: sta,
+
+        str: str,
+        arc: arc,
+        int: int,
+
+        class: Object.keys(charClasses).find((key) => charClasses[key] === charClass) // set class attr in db to the key of the currently set class
       })
       .eq("id", characterId)
 
@@ -236,8 +250,8 @@ const CreateCharacter = () => {
 
         <div className="flex justify-center items-center gap-3 py-3 mb-6 h-min rounded-lg w-full">
           <StatPicker icon={<FaHeart />} fullName="Health" abbrev="HP" set={setHp} defaultVal={hp} />
-          <StatPicker icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" set={setDefense} defaultVal={defense} />
-          <StatPicker icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" set={setStamina} defaultVal={stamina} />
+          <StatPicker icon={<FaShieldAlt />} fullName="Defense" abbrev="DEF" set={setDef} defaultVal={def} />
+          <StatPicker icon={<FaBoltLightning />} fullName="Stamina" abbrev="STA" set={setSta} defaultVal={sta} />
 
           {charClass === charClasses.brawler && <StatPicker icon={<PiSwordFill />} fullName="Strength" abbrev="STR" set={setStr} defaultVal={str} color={charClasses.brawler.color} />}
           {charClass === charClasses.psychic && <StatPicker icon={<GiMagicPalm />} fullName="Arcane" abbrev="ARC" set={setArc} defaultVal={arc} color={charClasses.psychic.color} />}
