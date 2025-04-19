@@ -4,7 +4,7 @@ Submitted by: **Rafael Niebles**
 
 This web app: **Allows you to create a character, dress them up, and give them some attributes!**
 
-Time spent: **X** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
@@ -37,37 +37,24 @@ The following **optional** features are implemented:
         - Brawlers have STR
         - Psychics have ARC
         - Rangers have INT 
-  - e.g., a Dungeons and Dragons class or a development team role (project manager, product owner, etc.)
-  - User can choose a `category` option to describe their crewmate before any attributes are specified
-  - Based on the category value, users are allowed to access only a subset of the possible attributes
 - [x] A section of the summary page, displays summary statistics about a user’s crew on their crew page
-  - e.g., the percent of members with a certain attribute 
-    - Combined stats
-- [ ] The summary page displays a custom “success” metric about a user’s crew which changes the look of the crewmate list
-  - e.g., a pirate crew’s predicted success at commandeering a new galley
-    - Take majority class and change BG theme to it
-
-
-The following **additional** features are implemented:
-
-* [ ] List anything else that you added to improve the site's functionality!
+    - Amount of members of each class
+- [x] The summary page displays a custom “success” metric about a user’s crew which changes the look of the crewmate list
+    - Text saying what the majority class is
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
-
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+[Here's a walkthrough of implemented user stories](https://drive.google.com/file/d/1N0PREAnwAa8Mu_rCWG9FnPXsQSngTo1k/view?usp=sharing)
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+This is quite possibly some of the worst code I've written yet, but it was such a massive learning experience and SO much fun!
+
+The reason for the poor code was bad data design. At the heart of everything was the shape of my data (table cols) which I had to rework quite a bit to get the functionality I wanted. Now I know determining this *well* from the beginning is essential!
+
+The rest of the (very abundant knowledge!) I gained was corollary to this!
+
+Pixel art characters by me :)
 
 ## License
 
