@@ -46,6 +46,8 @@ The following **optional** features are implemented:
 
 [Here's a walkthrough of implemented user stories](https://drive.google.com/file/d/1N0PREAnwAa8Mu_rCWG9FnPXsQSngTo1k/view?usp=sharing)
 
+![Cover Image](./github/cover.png)
+
 ## Notes
 
 This is quite possibly some of the worst code I've written yet, but it was such a massive learning experience and SO much fun!
