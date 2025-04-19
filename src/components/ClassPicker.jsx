@@ -4,8 +4,6 @@ const ClassPicker = ({ icon, classData, get, set }) => {
   // NOTE: this might not work
   const isSelectedClass = get && (get === classData)
 
-  console.log(isSelectedClass)
-
   return (
     <button
       // fuckshit styling because we're dynamically passing color

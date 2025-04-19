@@ -71,9 +71,13 @@ const CreateCharacter = () => {
         .from("characters")
         .select() // NOTE: no arg selects all
         .eq("id", characterId)
-        .single() // NOTE: expects only 1 row to be returned
+        .limit(1) // NOTE: expects only 1 row to be returned
 
-      const characterData = character.data
+      if (character.data.length === 0){
+        return
+      }
+
+      const characterData = character.data[0]
 
       setSkinTone(characterData.skinTone)
       setName(characterData.name)
@@ -182,7 +186,7 @@ const CreateCharacter = () => {
       .single()
 
     // don't disallow own name since this would be the unique entry
-    if (dupe && dupe.data.name !== name) {
+    if (dupe.data && dupe.data.name !== name) {
       setDupeExists(true)
       return
     }

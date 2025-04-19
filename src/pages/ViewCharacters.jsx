@@ -9,6 +9,7 @@ const ViewCharacters = () => {
   const [dbCharacters, setDbCharacters] = useState([])
 
   const [presidingClass, setPresidingClass] = useState({})
+  const [classCounts, setClassCounts] = useState({})
 
   const [lastUpdateTime, setLastUpdateTime] = useState(Date.now()) // not semantically useful; used for reloading purposes
   const [didFetchCharacters, setDidFetchCharacters] = useState(false)
@@ -34,6 +35,9 @@ const ViewCharacters = () => {
         for (const character of characters.data) {
           classFrequencies[character.class] = (classFrequencies[character.class] || 0) + 1
         }
+
+        // set frequencies now that we have them
+        setClassCounts(classFrequencies)
 
         // find greatest one 
         let maxFreq = 0
@@ -80,12 +84,19 @@ const ViewCharacters = () => {
     <div>
       <h2 className="text-4xl text-center">View All Characters</h2>
 
-      {/* check if presiding class is ok */ Object.keys(presidingClass).length > 0 &&
-        <span className="flex justify-center w-full text-2xl">
-          The
-          <span className="mx-2" style={{ color: presidingClass.color }}> {presidingClass.fullName.toLowerCase().trim()}s </span>
-          are running the show!
-        </span>
+      {/* check if presiding class is ok */ presidingClass && Object.keys(presidingClass).length > 0 ?
+        <span className="flex flex-col items-center justify-center w-full text-2xl">
+
+          <span className="flex gap-8 my-2">
+            <span>{classCounts.brawler ?? 0}<span className="ml-2" style={{ color: charClasses.brawler.color }}>brawler(s)</span></span>
+            <span>{classCounts.psychic ?? 0}<span className="ml-2" style={{ color: charClasses.psychic.color }}>psychic(s)</span></span>
+            <span>{classCounts.ranger ?? 0}<span className="ml-2" style={{ color: charClasses.ranger.color }}>ranger(s)</span></span>
+          </span>
+
+          <span className="mb-4">The<span className="mx-2" style={{ color: presidingClass.color }}> {presidingClass.fullName.toLowerCase().trim()}s</span>are running the show!</span>
+
+        </span> :
+        <span className="flex justify-center text-gray-600">No characters yet!</span>
       }
 
       <div className="flex flex-wrap p-4 gap-3 w-100">
